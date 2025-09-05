@@ -1,59 +1,68 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Bell } from "lucide-react";  // Notifications icon
 import Logo from "./Logo";
 import LogoutButton from "./Logoutbtn";
-import Container from "./Container";
+
 function Header() {
   const authStatus = true;
 
   const navItems = [
     { name: "Home", url: "/", active: true },
     { name: "Find Team", url: "/find-team", active: true },
-    { name: "Notifications", url: "/notifications", active: true },
-    { name: "Login", url: "/login", active: !authStatus },
-    { name: "Signup", url: "/signup", active: !authStatus },
   ];
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="flex items-center justify-between h-16">
-          {/* Left: Logo + Nav */}
-          <div className="flex items-center space-x-6">
-            <Logo />
-          <ul className="hidden md:flex items-center space-x-6">
-            {navItems.map(
-              (item) =>
-                item.active && (
-                  <li key={item.name}>
-                    <Link
-                      to={item.url}
-                      className="text-gray-700 hover:text-black font-medium transition-colors"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                )
-            )}
-          </ul>
+    <header className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 sticky top-0 z-50 shadow-md">
+      <div className="flex items-center justify-between h-16 px-6">
+        {/* Left: Logo + Brand */}
+        <div className="flex items-center space-x-2">
+          <Logo />
+          <span className="text-xl font-bold text-white">HackDevs</span>
         </div>
 
-        {/* Right: Search + Profile/Logout */}
-        <div className="flex items-center space-x-4">
-          {/* Search bar */}
-          <div className="hidden sm:flex items-center bg-gray-100 rounded-lg px-3 py-1">
+        {/* Middle: Nav */}
+        <ul className="hidden md:flex items-center space-x-8">
+          {navItems.map(
+            (item) =>
+              item.active && (
+                <li key={item.name}>
+                  <Link
+                    to={item.url}
+                    className="text-white/90 hover:text-white font-medium transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              )
+          )}
+        </ul>
+
+        {/* Right: Search + Notifications + Profile */}
+        <div className="flex items-center space-x-6">
+          {/* Search */}
+          <div className="hidden sm:flex items-center bg-white/20 rounded-full px-4 py-1 backdrop-blur-sm">
             <input
               type="text"
               placeholder="Search…"
-              className="bg-transparent outline-none text-sm w-40 sm:w-56"
+              className="bg-transparent outline-none text-sm text-white placeholder-white/70 w-48 sm:w-64"
             />
           </div>
 
-          {/* Profile + Logout */}
+          {/* Notifications Icon */}
+          <Link
+            to="/notifications"
+            className="text-white/90 hover:text-white transition-colors"
+          >
+            <Bell className="w-6 h-6" />
+          </Link>
+
+          {/* Profile/Logout */}
           {authStatus ? (
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-4">
               <Link
                 to="/profile"
-                className="text-gray-700 hover:text-black font-medium"
+                className="text-white/90 hover:text-white font-medium"
               >
                 Profile
               </Link>
@@ -61,10 +70,10 @@ function Header() {
             </div>
           ) : (
             <Link
-              to="/login"
-              className="text-gray-700 hover:text-black font-medium"
+              to="/signup"
+              className="text-white/90 hover:text-white font-medium"
             >
-              Login
+              Signup
             </Link>
           )}
         </div>
