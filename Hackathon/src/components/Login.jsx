@@ -18,6 +18,7 @@ export default function Login() {
       if (session) {
         const userData = await authservice.getuser();
         if (userData) {
+          console.log(userData);
           dispatch(storeLogin(userData));
         }
         navigate('/');

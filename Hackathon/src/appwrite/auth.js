@@ -51,6 +51,15 @@ async getuser() {
             throw error;
     }
 }
+async deleteUser(){
+    try{
+        const response = await this.account.delete();
+        return response;
+    }
+    catch (error) {
+        throw error;
+}
+}
 }
 const authservice = new AuthService();
 export default authservice;

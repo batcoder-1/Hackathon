@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Lottie from "lottie-react";
 import heroAnimation from "../assets/Coding.json"; // Ensure you have a Lottie JSON file
-
+import authservice from "../appwrite/auth";
+import { useDispatch } from "react-redux";
+import { login } from "../components/Store/Authslice";
 export default function Home() {
+  const dispatch=useDispatch();
+  useEffect(() => {
+  async function checkSession(){
+      try{
+          const user  = await authservice.getuser();
+          if(user){
+              dispatch(login());
+          }
+      }
+      catch(error){
+          console.log(error);
+      }
+  }
+  checkSession();
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white flex flex-col items-center px-6 py-16">
       {/* Hero Section */}
