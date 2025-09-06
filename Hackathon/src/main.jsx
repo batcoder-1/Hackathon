@@ -1,16 +1,18 @@
-import App from "./App";
 import React from "react";
-import "./index.css";
 import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./components/Store/Store";
+import App from "./App";
 import Home from "./Pages/Home";
 import FindTeam from "./Pages/FindTeam";
 import Notifications from "./components/Notifications";
 import Profile from "./Pages/Profile";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import { Provider } from "react-redux";
-import store from "./components/Store/Store";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Authlayout from "./components/Authlayout";
+import "./index.css";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,31 +20,52 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Home />, // Public route
       },
       {
         path: "/find-team",
-        element: <FindTeam />,
+        element: (
+          <Authlayout Authentication={true}>
+            <FindTeam />
+          </Authlayout>
+        ),
       },
       {
         path: "/notifications",
-        element: <Notifications />,
+        element: (
+          <Authlayout Authentication={true}>
+            <Notifications />
+          </Authlayout>
+        ),
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <Authlayout Authentication={true}>
+            <Profile />
+          </Authlayout>
+        ),
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <Authlayout Authentication={false}>
+            <Login />
+          </Authlayout>
+        ),
       },
       {
         path: "/signup",
-        element: <Signup />,
+        element: (
+          <Authlayout Authentication={false}>
+            <Signup />
+          </Authlayout>
+        ),
       },
     ],
   },
 ]);
+
 const root = createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
