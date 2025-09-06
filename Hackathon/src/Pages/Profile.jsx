@@ -58,10 +58,9 @@ export default function Profile() {
                   href={user.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-indigo-400 w-32 px-5 py-3 rounded-lg shadow-md flex flex-col items-center justify-center hover:bg-indigo-500 transition"
+                  className="bg-indigo-400 w-32 h-18 rounded-lg shadow-md flex items-center justify-center hover:bg-indigo-500 transition"
                 >
-                  <FaGithub className="text-3xl text-white mb-1" />
-                  <span className="text-white text-sm">GitHub</span>
+                  <FaGithub className="text-3xl text-white" />
                 </a>
               </div>
 

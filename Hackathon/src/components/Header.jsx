@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Bell } from "lucide-react";
 import Logo from "./Logo";
 import LogoutButton from "./Logoutbtn";
 import { useSelector } from "react-redux";
+import Notifications from "./Notifications";
 
 function Header() {
   const authStatus = useSelector((state) => state.Auth.status);
@@ -61,12 +61,10 @@ function Header() {
           </div>
 
           {/* Notifications */}
-          <Link
-            to="/notifications"
-            className="text-purple-900 hover:text-purple-700 transition-colors"
-          >
-            <Bell className="w-6 h-6" />
-          </Link>
+
+          <>
+            <Notifications />
+          </>
 
           {/* Profile/Logout */}
           {authStatus ? (
