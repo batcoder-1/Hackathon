@@ -1,58 +1,47 @@
-import React from "react";  
+import React from "react";
+import Lottie from "lottie-react";
+import heroAnimation from "../assets/Coding.json"; // Ensure you have a Lottie JSON file
+
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center px-6 py-12">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white flex flex-col items-center px-6 py-16">
       {/* Hero Section */}
-      <main className="flex flex-col items-center text-center max-w-4xl mt-16 relative">
-        {/* Illustrations (replace src with your own images) */}
-        <img
-          src="/images/chick.png"
-          alt="Chick Illustration"
-          className="hidden md:block absolute left-[-150px] bottom-0 w-40"
-        />
-        <img
-          src="/images/penguin.png"
-          alt="Penguin Illustration"
-          className="hidden md:block absolute right-[-150px] bottom-0 w-44"
-        />
+      <main className="flex flex-col items-center text-center max-w-3xl mt-12 relative">
+        {/* Lottie Animation */}
+        <div className="w-64 h-64 md:w-80 md:h-80 mb-6">
+          <Lottie animationData={heroAnimation} loop={true} />
+        </div>
 
-        <h2 className="text-5xl md:text-6xl font-extrabold leading-tight text-gray-900">
-          Set goals{" "}
-          <span className="bg-purple-200 text-purple-800 px-2 rounded-md text-lg align-middle">
-            plan
-          </span>{" "}
-          Stay on track{" "}
-          <span className="bg-purple-100 text-purple-700 px-2 rounded-md text-lg align-middle">
-            step
-          </span>{" "}
-          Let time be your teammate{" "}
-          <span className="bg-yellow-200 text-yellow-800 px-2 rounded-md text-lg align-middle">
-            done
-          </span>
-        </h2>
+        {/* Title */}
+        <h1 className="text-5xl md:text-6xl font-extrabold text-pink-800 drop-shadow-sm">
+          Welcome to HackDevs!
+        </h1>
 
-        <p className="mt-6 text-gray-600 text-lg max-w-2xl">
-          Quests, challenges, and mini-victories are designed to help children learn to act with pleasure.
+        {/* Subtitle */}
+        <p className="mt-6 text-gray-700 text-xl max-w-2xl">
+          Ready to find your <span className="text-pink-600 font-semibold">Hackathon Partner</span>?  
+          Connect, collaborate, and build something amazing together.
         </p>
 
-        <button className="mt-8 px-6 py-3 bg-black text-white rounded-full font-semibold hover:bg-gray-900 transition">
-          Start the Quest
+        {/* CTA Button */}
+        <button className="mt-10 px-8 py-3 bg-pink-600 text-white rounded-full font-semibold text-lg shadow-md hover:bg-pink-700 transition">
+          Find Your Team
         </button>
       </main>
 
       {/* Stats Section */}
-      <section className="flex flex-col md:flex-row gap-8 md:gap-16 justify-center items-center mt-16 text-center">
-        <div>
-          <h3 className="text-2xl font-bold">120+</h3>
-          <p className="text-gray-600">Methods</p>
+      <section className="flex flex-col md:flex-row gap-10 md:gap-20 justify-center items-center mt-20 text-center">
+        <div className="bg-white shadow-md rounded-xl px-6 py-4">
+          <h3 className="text-3xl font-bold text-pink-700">120+</h3>
+          <p className="text-gray-600">Hackathon Methods</p>
         </div>
-        <div>
-          <h3 className="text-2xl font-bold">23.4K</h3>
-          <p className="text-gray-600">Successes</p>
+        <div className="bg-white shadow-md rounded-xl px-6 py-4">
+          <h3 className="text-3xl font-bold text-pink-700">23.4K</h3>
+          <p className="text-gray-600">Success Stories</p>
         </div>
-        <div>
-          <h3 className="text-2xl font-bold">100%</h3>
-          <p className="text-gray-600">Outcome</p>
+        <div className="bg-white shadow-md rounded-xl px-6 py-4">
+          <h3 className="text-3xl font-bold text-pink-700">100%</h3>
+          <p className="text-gray-600">Collaboration Rate</p>
         </div>
       </section>
     </div>
