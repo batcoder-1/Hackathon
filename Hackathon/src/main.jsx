@@ -8,6 +8,8 @@ import Notifications from "./Pages/Notifications";
 import Profile from "./Pages/Profile";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import { Provider } from "react-redux";
+import store from "./components/Store/Store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router=createBrowserRouter([
     {
@@ -43,7 +45,7 @@ const router=createBrowserRouter([
 ])
 const root = createRoot(document.getElementById("root"))
 root.render(
-    <React.StrictMode>
+  <Provider store={store}>
         <RouterProvider router={router} />
-    </React.StrictMode>
+  </Provider>
 )
