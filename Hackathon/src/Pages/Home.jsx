@@ -19,8 +19,9 @@ export default function Home() {
 
         {/* Subtitle */}
         <p className="mt-6 text-gray-700 text-xl max-w-2xl">
-          Ready to find your <span className="text-pink-600 font-semibold">Hackathon Partner</span>?  
-          Connect, collaborate, and build something amazing together.
+          Ready to find your{" "}
+          <span className="text-pink-600 font-semibold">Hackathon Partner</span>
+          ? Connect, collaborate, and build something amazing together.
         </p>
 
         {/* CTA Button */}
