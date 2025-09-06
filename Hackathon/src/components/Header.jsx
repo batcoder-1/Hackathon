@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import LogoutButton from "./Logoutbtn";
 import { useSelector } from "react-redux";
@@ -7,7 +7,6 @@ import Notifications from "./Notifications";
 
 function Header() {
   const authStatus = useSelector((state) => state.Auth.status);
-  const location = useLocation();
 
   const navItems = [
     { name: "Home", url: "/", active: true },
@@ -22,7 +21,7 @@ function Header() {
           <Logo />
           <span className="text-xl font-bold text-purple-900">HackDevs</span>
 
-          {/* Nav Pills with glassmorphism and hover effects */}
+          {/* Nav Pills with hover effect only (no text color change) */}
           <ul className="hidden md:flex items-center space-x-3">
             {navItems.map(
               (item) =>
@@ -30,16 +29,7 @@ function Header() {
                   <li key={item.name}>
                     <Link
                       to={item.url}
-                      className={`relative px-5 py-2 font-medium rounded-full transition-all duration-300 ease-in-out
-                        before:absolute before:inset-0 before:rounded-full before:transition-all before:duration-300
-                        before:bg-gradient-to-r before:from-purple-500/50 before:via-pink-400/50 before:to-pink-300/50
-                        before:opacity-0 before:scale-90
-                        hover:before:opacity-100 hover:before:scale-100 hover:shadow-lg hover:scale-105
-                        ${
-                          location.pathname === item.url
-                            ? "text-white before:opacity-100 before:scale-100 shadow-md"
-                            : "text-purple-900 hover:text-white"
-                        }`}
+                      className="relative px-5 py-2 font-medium rounded-full text-purple-900 transition-all duration-300 ease-in-out hover:bg-black/10"
                     >
                       <span className="relative z-10">{item.name}</span>
                     </Link>
@@ -61,26 +51,23 @@ function Header() {
           </div>
 
           {/* Notifications */}
-
-          <>
-            <Notifications />
-          </>
+          <Notifications />
 
           {/* Profile/Logout */}
           {authStatus ? (
             <div className="flex items-center space-x-3 md:space-x-4">
               <Link
+                className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-purple-900 font-medium transition-all hover:bg-black/10"
                 to="/profile"
-                className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-purple-900 font-medium transition-all hover:bg-gradient-to-r hover:from-purple-400/40 hover:via-pink-300/40 hover:to-pink-200/40 hover:text-white hover:shadow-lg"
               >
                 Profile
               </Link>
-              <LogoutButton />
+              <LogoutButton className="px-3 py-1 rounded-full bg-pink-500 text-white font-medium hover:bg-pink-600 transition-all" />
             </div>
           ) : (
             <Link
+              className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-purple-900 font-medium transition-all hover:bg-black/10"
               to="/signup"
-              className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-purple-900 font-medium transition-all hover:bg-gradient-to-r hover:from-purple-400/40 hover:via-pink-300/40 hover:to-pink-200/40 hover:text-white hover:shadow-lg"
             >
               Signup
             </Link>
