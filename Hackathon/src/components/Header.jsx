@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { Bell } from "lucide-react";  // Notifications icon
 import Logo from "./Logo";
 import LogoutButton from "./Logoutbtn";
-
+import { useSelector } from "react-redux";
 function Header() {
-  const authStatus = true;
+  const authStatus = useSelector((state) => state.Auth.status);
 
   const navItems = [
     { name: "Home", url: "/", active: true },
