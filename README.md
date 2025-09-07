@@ -27,7 +27,7 @@ HackDevs is a **platform designed to make hackathons more collaborative and impa
 ## Demo
 
 A live demo will be available soon.  
- [Live Demo]([[https://hackdevs-demo.com](https://www.youtube.com/watch?v=yF_EOCweu3s)]
+ [Live Demo][https://hackdevs-demo.com](https://www.youtube.com/watch?v=yF_EOCweu3s)]
 
 ---
 
