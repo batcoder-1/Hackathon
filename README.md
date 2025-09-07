@@ -1,9 +1,4 @@
 # HackDevs
-
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  
-[![Contributors](https://img.shields.io/github/contributors/YourUsername/HackDevs.svg)](https://github.com/YourUsername/HackDevs/graphs/contributors)  
-[![Issues](https://img.shields.io/github/issues/YourUsername/HackDevs.svg)](https://github.com/YourUsername/HackDevs/issues)  
-
 HackDevs is a **platform designed to make hackathons more collaborative and impactful**. Our goal is to help participants find the right teammates based on skills, interests, and project goals, making hackathon collaboration seamless and efficient.
 
 ---
@@ -12,11 +7,9 @@ HackDevs is a **platform designed to make hackathons more collaborative and impa
 
 - [Features](#features)  
 - [Demo](#demo)  
-- [Screenshots](#screenshots)  
 - [Tech Stack](#tech-stack)  
 - [Installation](#installation)  
 - [Usage](#usage)  
-- [Contributing](#contributing)  
 - [Team](#team)  
 - [License](#license)  
 
@@ -34,17 +27,7 @@ HackDevs is a **platform designed to make hackathons more collaborative and impa
 ## Demo
 
 A live demo will be available soon.  
-*(Optional: If deployed, add the link here, e.g., [Live Demo](https://hackdevs-demo.com))*
-
----
-
-## Screenshots
-
-![Home Page](screenshots/home.png)  
-*Clean and modern layout showing the main landing page.*
-
-![About Us](screenshots/about.png)  
-*Detailed information about the team and the platform mission.*
+ [Live Demo]([https://hackdevs-demo.com](https://www.youtube.com/watch?v=yF_EOCweu3s))
 
 ---
 
