@@ -26,7 +26,22 @@
 - **Real-time Notifications**: Stay updated on team activities and invites.  
 
 ---
+## Contributions 👨‍💻
 
+This project was built collaboratively during a hackathon.
+Here are the key contributions I made:
+
+Implemented secure authentication using Appwrite.
+
+Set up client-side routing with React Router DOM.
+
+Built global state management using Redux Toolkit.
+
+Integrated database connectivity for persistent user data.
+
+Ensured smooth data flow and state handling across the app.
+
+---
 ## Demo 🎬
   
 [Watch Demo](https://www.youtube.com/watch?v=yF_EOCweu3s)
