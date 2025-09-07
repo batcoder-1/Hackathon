@@ -1,11 +1,9 @@
 import config from "./config";
-import { printConfig } from "./config";
 import { Client,Account,ID } from "appwrite";
 export class AuthService {// we created a separate class so that whenvever we create an object we can use its methods and create a new account or login or logout
     client=new Client();
     account;
     constructor(){
-        printConfig();
          console.log(config.appwriteurl);
          console.log(config.appwriteprojectid);
         this.client

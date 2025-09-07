@@ -1,32 +1,54 @@
 import React, { useState } from "react";
 import TeamResult from "../components/teamResult";
-import { User, Code, Briefcase } from "lucide-react"; // nice icons
+import { User, Code, Briefcase } from "lucide-react"; 
+import filter from "../file";
 
 export default function FindTeam() {
   const [role, setRole] = useState("");
   const [skills, setSkills] = useState("");
   const [experience, setExperience] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [profiles, setProfiles] = useState([]); // 🔹 new state
+  const [loading, setLoading] = useState(false);
 
-  const handleProceed = (e) => {
+  async function runFilter() {
+    try {
+      setLoading(true);
+      const result = await filter({ role, skills, experience });
+      console.log("AI Response:", result);
+      setProfiles(result); // 🔹 save AI profiles
+    } catch (error) {
+      console.error("Filter error:", error);
+      setProfiles([]); // fallback
+    }
+  }
+
+  const handleProceed = async (e) => {
     e.preventDefault();
+    await runFilter();
     setIsSubmitted(true);
     console.log({ role, skills, experience });
   };
 
   if (isSubmitted) {
-    return <TeamResult role={role} skills={skills} experience={experience} />;
+    return <TeamResult profiles={profiles} />; // 🔹 pass profiles as prop
   }
-
+if (loading) {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <h1 className="text-2xl font-bold text-indigo-600 animate-pulse">
+        Loading...
+      </h1>
+    </div>
+  );
+}
   return (
     <div className="max-w-3xl mx-auto mt-12 p-8 bg-gradient-to-br from-indigo-50 via-white to-indigo-100 shadow-xl rounded-2xl border border-gray-200">
-      {/* Header */}
       <h2 className="text-4xl font-extrabold mb-8 text-gray-800 text-center">
         🔍 Find Your <span className="text-indigo-600">Teammate</span>
       </h2>
       <p className="text-center text-gray-600 mb-10">
-        Fill out the details below to find teammates that match your
-        preferences.
+        Fill out the details below to find teammates that match your preferences.
       </p>
 
       <form className="space-y-8" onSubmit={handleProceed}>

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { login as storeLogin } from "../components/Store/Authslice";
-import authservice from "../appwrite/auth";
-import Logo from "./Logo";
-
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { login as storeLogin } from '../components/Store/Authslice';
+import authservice from '../appwrite/auth';
+import services from '../appwrite/configure';
+import Logo from './Logo';
 export default function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,8 +18,7 @@ export default function Signup() {
     trigger,
     formState: { errors },
   } = useForm();
-
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
@@ -59,20 +58,42 @@ export default function Signup() {
   }, [passwordValue, confirmPasswordValue, trigger]);
 
   const createAccount = async (data) => {
-    setError("");
-    try {
-      const userData = await authservice.createAccount(data);
-      if (userData) {
-        const currentUser = await authservice.getuser();
-        if (currentUser) {
-          dispatch(storeLogin(currentUser));
-        }
-        navigate("/");
+  setError('');
+  try {
+    // 1. Create account in Appwrite Auth
+    const userData = await authservice.createAccount(data);
+
+    if (userData) {
+      // 2. Get current logged-in user
+      const currentUser = await authservice.getuser();
+
+      if (currentUser) {
+        // 3. Store user in Redux
+        dispatch(storeLogin(currentUser));
+
+        // 4. Create user profile in Database using services
+        await services.createUser(currentUser.$id, {
+          Username: data.name,
+          Bio: '',
+          profileImageId: '',
+          ResumeId: '',
+          Followers: 0,
+          Following: 0,
+          Skills: [],
+          College: '',
+          University: '',
+          Github: 'https://github.com/'
+        });
       }
-    } catch (err) {
-      setError(err?.message || "Something went wrong");
+
+      // 5. Navigate after signup
+      navigate('/');
     }
-  };
+  } catch (err) {
+    setError(err?.message || 'Something went wrong');
+  }
+};
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

@@ -4,7 +4,6 @@ import heroAnimation from "../assets/Coding.json";
 import authservice from "../appwrite/auth";
 import { useDispatch } from "react-redux";
 import { login } from "../components/Store/Authslice";
-
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
