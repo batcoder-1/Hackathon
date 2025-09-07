@@ -121,16 +121,6 @@ export default function Profile() {
                   </p>
                   <p className="text-gray-600 text-sm">Following</p>
                 </div>
-                {/* GitHub */}
-                <a
-                  href={profile?.Github || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-800 transition"
-                >
-                  <FaGithub className="text-2xl sm:text-3xl" />
-                  <span className="hidden sm:inline font-medium"></span>
-                </a>
               </div>
 
               <button
@@ -224,25 +214,25 @@ export default function Profile() {
       {/* Resume Section */}
       <div className="p-4 sm:p-6 bg-white shadow-lg rounded-xl border border-gray-200">
         <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">
-          Resume
+          Github Profile
         </h3>
         {editMode ? (
           <input
             type="text"
-            name="ResumeId"
-            value={form.ResumeId}
+            name="Github"
+            value={form.Github}
             onChange={handleChange}
             className="w-full p-2 border rounded"
-            placeholder="Resume file ID or URL"
+            placeholder="Github Profile URL"
           />
         ) : (
           <a
-            href={profile?.Resume || "#"}
+            href={profile?.Github || "#"}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-5 sm:px-6 py-2 sm:py-3 bg-indigo-500 text-white rounded-lg font-semibold hover:bg-indigo-600 shadow-md transition"
           >
-            View Resume
+            View Github Profile
           </a>
         )}
       </div>
