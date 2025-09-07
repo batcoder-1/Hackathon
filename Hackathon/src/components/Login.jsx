@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { login as storeLogin } from '../components/Store/Authslice';
 import authservice from '../appwrite/auth';
 import Logo from './Logo';
@@ -20,6 +20,8 @@ export default function Login() {
         if (userData) {
           console.log(userData);
           dispatch(storeLogin(userData));
+          // const u = useSelector((state) => state.Auth.userdata); 
+          // console.log(u);
         }
         navigate('/');
       }

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { FaGithub } from "react-icons/fa";
 import services from "../appwrite/configure";
-import { useSelector } from "react-redux";
+import authservice from "../appwrite/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../components/Store/Authslice";
 
 export default function Profile() {
   const userdata = useSelector((state) => state.Auth.userdata);
   const userId = userdata?.$id;
+  console.log(userdata);
+  const dispatch = useDispatch();
   const [profile, setProfile] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [form, setForm] = useState({
@@ -25,10 +29,15 @@ export default function Profile() {
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
-    async function fetchProfile() {
+    async function fetchUserAndProfile() {
       setLoading(true);
       setError("");
       try {
+        let currentUser = userdata;
+        if (!currentUser) {
+          currentUser = await authservice.getuser();
+          dispatch(login(currentUser));
+        }
         const { profile } = await services.getCurrentUserProfile();
         setProfile(profile);
         setForm({
@@ -44,13 +53,13 @@ export default function Profile() {
           Github: profile.Github || ""
         });
       } catch (err) {
+        console.error(err);
         setError("Failed to load profile");
       }
       setLoading(false);
     }
-    if (userId) fetchProfile();
-  }, [userId]);
-
+    fetchUserAndProfile();
+  }, [userId, userdata, dispatch]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -73,6 +82,7 @@ export default function Profile() {
       const { profile } = await services.getCurrentUserProfile();
       setProfile(profile);
     } catch (err) {
+      console.error(err);
       setError("Failed to update profile");
     }
     setLoading(false);
@@ -89,7 +99,7 @@ export default function Profile() {
           {/* Left: Profile Image + Name + Username */}
           <div className="flex flex-col items-center">
             <img
-              src={profile?.profileImage || "https://i.pravatar.cc/150?img=3"}
+              src={profile?.profileImage || null}
               alt="Profile"
               className="w-32 h-32 rounded-full object-cover border-4 border-indigo-400 shadow-lg"
             />

@@ -4,10 +4,10 @@ const config={
     appwritedatabaseid:String(import.meta.env.VITE_APPWRITE_DATABASE_ID),
     appwritecollectionid:String(import.meta.env.VITE_APPWRITE_COLLECTION_ID),
     appwritebucketidresume:String(import.meta.env.VITE_APPWRITE_BUCKET_ID_RESUME),
-    appwritebucketidimages:String(import.meta.env.VITE_APPWRITE_BUCKET_ID_IMAGES)
+    appwritebucketidimages:String(import.meta.env.VITE_APPWRITE_BUCKET_ID_IMAGES),
+    geminiapikey:String(import.meta.env.VITE_GEMINI_API_KEY)
 }
-function printConfig() {
-    console.log(config);
-}
+// function printConfig() {
+//     console.log(config);
+// }
 export default config;
-export { printConfig };

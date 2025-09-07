@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"; // build this to control state when login and logout
 const initialState = {
-  status: true,
+  status: false,
   userdata: null,
 };
-
 const AuthSlice = createSlice({
   name: "Auth",
   initialState,

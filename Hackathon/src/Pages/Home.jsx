@@ -4,6 +4,7 @@ import heroAnimation from "../assets/Coding.json";
 import authservice from "../appwrite/auth";
 import { useDispatch } from "react-redux";
 import { login } from "../components/Store/Authslice";
+import { Link } from "react-router";
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -41,14 +42,12 @@ export default function Home() {
         </p>
 
         {/* CTA Button */}
-        <button
-          onClick={() => (window.location.href = "/find-team")}
-          className="mt-6 sm:mt-10 px-6 sm:px-8 py-2.5 sm:py-3 bg-pink-600 text-white rounded-full font-semibold text-base sm:text-lg shadow-md hover:bg-pink-700 transition"
-        >
-          Find Your Team
-        </button>
+        <Link to="/find-team">
+          <button className="mt-6 sm:mt-10 px-6 sm:px-8 py-2.5 sm:py-3 bg-pink-600 text-white rounded-full font-semibold text-base sm:text-lg shadow-md hover:bg-pink-700 transition">
+            Find Your Team
+          </button>
+        </Link>
       </main>
-
       {/* Stats Section */}
       <section className="flex flex-col sm:flex-row flex-wrap gap-6 sm:gap-10 md:gap-20 justify-center items-center mt-12 sm:mt-20 text-center w-full max-w-5xl">
         <div className="flex-1 min-w-[180px] bg-white shadow-md rounded-xl px-6 py-4">

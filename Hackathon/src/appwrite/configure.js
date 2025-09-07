@@ -22,6 +22,7 @@ export class Services {
   async createUser(userId, { Username, Bio, profileImageId, Followers , Following , Skills = [], College, University, ResumeId, Github }) {
     try {
       return await this.database.createDocument(
+        config.appwritedatabaseid,
         config.appwritecollectionid,
         userId,
         {
@@ -45,6 +46,7 @@ export class Services {
   async updateUser(userId, { Username, Bio, profileImageId, Followers, Following, Skills, College, University, ResumeId, Github }) {
     try {
       return await this.database.updateDocument(
+        config.appwritedatabaseid,
         config.appwritecollectionid,
         userId,
         {
@@ -182,6 +184,7 @@ export class Services {
     try {
       const user = await this.account.get();
       const profile = await this.database.getDocument(
+        config.appwritedatabaseid,
         config.appwritecollectionid,
         user.$id
       );
@@ -190,8 +193,20 @@ export class Services {
       throw error;
     }
   }
+  async getUserProfile(queries=[Query.equal("Skills", [])]) {
+    try {
+      const user = await this.account.get();
+      const profile = await this.database.getDocument(
+        config.appwritedatabaseid,
+        config.appwritecollectionid,
+        user.$id
+      );
+      return queries;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
-
 const services = new Services();
 export default services;
 export { services };

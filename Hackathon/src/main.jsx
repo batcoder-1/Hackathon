@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       {
         path: "/find-team",
         element: (
-          <Authlayout Authentication={true}>
+          <Authlayout>
             <FindTeam />
           </Authlayout>
         ),
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       {
         path: "/notifications",
         element: (
-          <Authlayout Authentication={true}>
+          <Authlayout>
             <Notifications />
           </Authlayout>
         ),
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: (
-          <Authlayout Authentication={true}>
+          <Authlayout>
             <Profile />
           </Authlayout>
         ),
@@ -49,17 +49,13 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: (
-          <Authlayout Authentication={false}>
             <Login />
-          </Authlayout>
         ),
       },
       {
         path: "/signup",
         element: (
-          <Authlayout Authentication={false}>
             <Signup />
-          </Authlayout>
         ),
       },
     ],
