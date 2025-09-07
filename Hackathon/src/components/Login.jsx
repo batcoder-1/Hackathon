@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login as storeLogin } from '../components/Store/Authslice';
 import authservice from '../appwrite/auth';
 import Logo from './Logo';
@@ -9,10 +9,10 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleLogin = async (data) => {
-    setError('');
+    setError("");
     try {
       const session = await authservice.Login(data);
       if (session) {
@@ -23,7 +23,7 @@ export default function Login() {
           // const u = useSelector((state) => state.Auth.userdata); 
           // console.log(u);
         }
-        navigate('/');
+        navigate("/");
       }
     } catch (error) {
       setError(error.message);
@@ -33,13 +33,13 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="mx-auto w-full max-w-md bg-white rounded-xl p-8 shadow-md">
-        <div className="mb-4 flex justify-center">
-            <Logo/>
-            <h2 className="text-2xl font-bold leading-tight text-center">
-                Sign in to your account
-            </h2>
+        <div className="mb-4 flex flex-col items-center text-center space-y-3">
+          <Logo />
+          <h2 className="text-2xl font-bold leading-tight">
+            Sign in to your account
+          </h2>
         </div>
-        
+
         <p className="mt-2 text-center text-sm text-gray-600">
           Don't have an account?&nbsp;
           <Link
@@ -55,7 +55,10 @@ export default function Login() {
         <form onSubmit={handleSubmit(handleLogin)} className="mt-8">
           <div className="space-y-5">
             <div>
-              <label htmlFor="email" className="text-base font-medium text-gray-900">
+              <label
+                htmlFor="email"
+                className="text-base font-medium text-gray-900"
+              >
                 Email address
               </label>
               <div className="mt-2">
@@ -64,11 +67,11 @@ export default function Login() {
                   className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1"
                   type="email"
                   placeholder="Enter your email"
-                  {...register('email', {
-                    required: 'Email is required',
+                  {...register("email", {
+                    required: "Email is required",
                     pattern: {
                       value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-                      message: 'Email address must be a valid address',
+                      message: "Email address must be a valid address",
                     },
                   })}
                 />
@@ -76,7 +79,10 @@ export default function Login() {
             </div>
 
             <div>
-              <label htmlFor="password" className="text-base font-medium text-gray-900">
+              <label
+                htmlFor="password"
+                className="text-base font-medium text-gray-900"
+              >
                 Password
               </label>
               <div className="mt-2">
@@ -85,8 +91,8 @@ export default function Login() {
                   className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1"
                   type="password"
                   placeholder="Enter your password"
-                  {...register('password', {
-                    required: 'Password is required',
+                  {...register("password", {
+                    required: "Password is required",
                   })}
                 />
               </div>

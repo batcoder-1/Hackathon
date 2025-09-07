@@ -22,7 +22,7 @@ export default function Profile() {
     College: "",
     University: "",
     ResumeId: "",
-    Github: ""
+    Github: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -50,7 +50,7 @@ export default function Profile() {
           College: profile.College || "",
           University: profile.University || "",
           ResumeId: profile.Resume || "",
-          Github: profile.Github || ""
+          Github: profile.Github || "",
         });
       } catch (err) {
         console.error(err);
@@ -78,7 +78,6 @@ export default function Profile() {
       await services.updateUser(userId, form);
       setSuccess("Profile updated successfully!");
       setEditMode(false);
-      // Refresh profile
       const { profile } = await services.getCurrentUserProfile();
       setProfile(profile);
     } catch (err) {
@@ -88,61 +87,54 @@ export default function Profile() {
     setLoading(false);
   };
 
-  if (loading && !profile) return <div className="text-center mt-10">Loading...</div>;
-  if (error && !profile) return <div className="text-center mt-10 text-red-500">{error}</div>;
+  if (loading && !profile)
+    return <div className="text-center mt-10">Loading...</div>;
+  if (error && !profile)
+    return <div className="text-center mt-10 text-red-500">{error}</div>;
 
   return (
-    <div className="max-w-4xl mx-auto mt-12 space-y-8">
+    <div className="max-w-4xl mx-auto mt-8 px-4 sm:px-6 lg:px-8 space-y-8">
       {/* Profile Box */}
-      <div className="p-8 bg-gradient-to-r from-indigo-50 to-white shadow-xl rounded-2xl border border-indigo-100">
-        <div className="flex items-start space-x-10">
+      <div className="p-6 sm:p-8 bg-gradient-to-r from-indigo-50 to-white shadow-xl rounded-2xl border border-indigo-100">
+        <div className="flex flex-col md:flex-row md:items-start md:space-x-10 space-y-6 md:space-y-0">
           {/* Left: Profile Image + Name + Username */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center md:items-start">
             <img
               src={profile?.profileImage || null}
               alt="Profile"
-              className="w-32 h-32 rounded-full object-cover border-4 border-indigo-400 shadow-lg"
+              className="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-indigo-400 shadow-lg"
             />
-            <h2 className="mt-4 text-2xl font-bold text-gray-800">
+            <h2 className="mt-4 text-xl sm:text-2xl font-bold text-gray-800 text-center md:text-left">
               {profile?.Username || "No Name"}
             </h2>
-            <p className="text-gray-500 text-sm">@{profile?.Username?.toLowerCase() || "username"}</p>
+            <p className="text-gray-500 text-sm text-center md:text-left">
+              @{profile?.Username?.toLowerCase() || "username"}
+            </p>
           </div>
 
           {/* Right: Stats + GitHub + Button + Bio */}
-          <div className="flex-1 flex flex-col justify-start">
+          <div className="flex-1 flex flex-col justify-start w-full">
             {/* Stats + GitHub + Edit Button */}
-            <div className="flex items-center justify-between mb-6">
-              {/* Stats + GitHub */}
-              <div className="flex items-center space-x-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+              <div className="flex flex-wrap justify-center sm:justify-start gap-4">
                 {/* Followers */}
-                <div className="bg-indigo-100 w-32 px-5 py-3 rounded-lg shadow-md text-center hover:bg-indigo-200 transition">
-                  <p className="text-xl font-bold text-indigo-700">
+                <div className="bg-indigo-100 w-28 sm:w-32 px-4 py-3 rounded-lg shadow-md text-center hover:bg-indigo-200 transition">
+                  <p className="text-lg sm:text-xl font-bold text-indigo-700">
                     {profile?.Followers || 0}
                   </p>
                   <p className="text-gray-600 text-sm">Followers</p>
                 </div>
                 {/* Following */}
-                <div className="bg-indigo-100 w-32 px-5 py-3 rounded-lg shadow-md text-center hover:bg-indigo-200 transition">
-                  <p className="text-xl font-bold text-indigo-700">
+                <div className="bg-indigo-100 w-28 sm:w-32 px-4 py-3 rounded-lg shadow-md text-center hover:bg-indigo-200 transition">
+                  <p className="text-lg sm:text-xl font-bold text-indigo-700">
                     {profile?.Following || 0}
                   </p>
                   <p className="text-gray-600 text-sm">Following</p>
                 </div>
-                {/* GitHub (same size as followers/following) */}
-                <a
-                  href={profile?.Github || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-indigo-400 w-32 h-18 rounded-lg shadow-md flex items-center justify-center hover:bg-indigo-500 transition"
-                >
-                  <FaGithub className="text-3xl text-white" />
-                </a>
               </div>
 
-              {/* Edit Button */}
               <button
-                className="px-5 py-3 bg-indigo-500 text-white rounded-lg font-semibold hover:bg-indigo-600 shadow-md transition"
+                className="px-4 sm:px-5 py-2 sm:py-3 bg-indigo-500 text-white rounded-lg font-semibold hover:bg-indigo-600 shadow-md transition w-full sm:w-auto"
                 onClick={() => setEditMode((prev) => !prev)}
               >
                 {editMode ? "Cancel" : "Edit Profile"}
@@ -150,7 +142,7 @@ export default function Profile() {
             </div>
 
             {/* Bio Section */}
-            <div className="bg-indigo-50 p-5 rounded-lg shadow-inner border border-indigo-100">
+            <div className="bg-indigo-50 p-4 sm:p-5 rounded-lg shadow-inner border border-indigo-100">
               <h3 className="text-gray-700 font-semibold mb-2">Bio</h3>
               {editMode ? (
                 <textarea
@@ -171,8 +163,10 @@ export default function Profile() {
       </div>
 
       {/* Skills Section */}
-      <div className="p-6 bg-white shadow-lg rounded-xl border border-gray-200">
-        <h3 className="text-xl font-bold text-gray-800 mb-4">Skills</h3>
+      <div className="p-4 sm:p-6 bg-white shadow-lg rounded-xl border border-gray-200">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">
+          Skills
+        </h3>
         {editMode ? (
           <input
             type="text"
@@ -187,7 +181,7 @@ export default function Profile() {
             {(profile?.Skills || []).map((skill, index) => (
               <span
                 key={index}
-                className="px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full font-medium text-sm hover:bg-indigo-200 transition"
+                className="px-3 py-1 sm:px-4 sm:py-2 bg-indigo-100 text-indigo-700 rounded-full font-medium text-sm hover:bg-indigo-200 transition"
               >
                 {skill}
               </span>
@@ -197,8 +191,10 @@ export default function Profile() {
       </div>
 
       {/* College / University Section */}
-      <div className="p-6 bg-white shadow-lg rounded-xl border border-gray-200">
-        <h3 className="text-xl font-bold text-gray-800 mb-2">College / University</h3>
+      <div className="p-4 sm:p-6 bg-white shadow-lg rounded-xl border border-gray-200">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
+          College / University
+        </h3>
         {editMode ? (
           <>
             <input
@@ -219,30 +215,34 @@ export default function Profile() {
             />
           </>
         ) : (
-          <p className="text-gray-600">{profile?.College || profile?.University}</p>
+          <p className="text-gray-600">
+            {profile?.College || profile?.University}
+          </p>
         )}
       </div>
 
       {/* Resume Section */}
-      <div className="p-6 bg-white shadow-lg rounded-xl border border-gray-200">
-        <h3 className="text-xl font-bold text-gray-800 mb-4">Resume</h3>
+      <div className="p-4 sm:p-6 bg-white shadow-lg rounded-xl border border-gray-200">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">
+          Github Profile
+        </h3>
         {editMode ? (
           <input
             type="text"
-            name="ResumeId"
-            value={form.ResumeId}
+            name="Github"
+            value={form.Github}
             onChange={handleChange}
             className="w-full p-2 border rounded"
-            placeholder="Resume file ID or URL"
+            placeholder="Github Profile URL"
           />
         ) : (
           <a
-            href={profile?.Resume || "#"}
+            href={profile?.Github || "#"}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-6 py-3 bg-indigo-500 text-white rounded-lg font-semibold hover:bg-indigo-600 shadow-md transition"
+            className="inline-block px-5 sm:px-6 py-2 sm:py-3 bg-indigo-500 text-white rounded-lg font-semibold hover:bg-indigo-600 shadow-md transition"
           >
-            View Resume
+            View Github Profile
           </a>
         )}
       </div>
@@ -251,7 +251,7 @@ export default function Profile() {
       {editMode && (
         <div className="flex justify-end">
           <button
-            className="px-6 py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 shadow-md transition"
+            className="px-5 sm:px-6 py-2 sm:py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 shadow-md transition"
             onClick={handleSubmit}
             disabled={loading}
           >
