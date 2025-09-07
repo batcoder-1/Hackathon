@@ -10,6 +10,7 @@ import Notifications from "./components/Notifications";
 import Profile from "./Pages/Profile";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import AboutUs from "./components/AboutUs";
 import Authlayout from "./components/Authlayout";
 import "./index.css";
 
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />, // Public route
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
       },
       {
         path: "/find-team",

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { login as storeLogin } from '../components/Store/Authslice';
-import authservice from '../appwrite/auth';
-import Logo from './Logo';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { login as storeLogin } from "../components/Store/Authslice";
+import authservice from "../appwrite/auth";
+import Logo from "./Logo";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -19,12 +19,12 @@ export default function Signup() {
     formState: { errors },
   } = useForm();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const passwordValue = watch('password', '');
-  const confirmPasswordValue = watch('confirmPassword', '');
+  const passwordValue = watch("password", "");
+  const confirmPasswordValue = watch("confirmPassword", "");
 
   // Strong password regex: min 8, uppercase, lowercase, number, special char
   const strongPasswordRegex =
@@ -33,8 +33,8 @@ export default function Signup() {
   // Generate a strong random password and autofill (with validation)
   const generateStrongPassword = () => {
     const chars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@$!%*?&';
-    let password = '';
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@$!%*?&";
+    let password = "";
     for (let i = 0; i < 12; i++) {
       password += chars.charAt(Math.floor(Math.random() * chars.length));
     }
@@ -43,8 +43,8 @@ export default function Signup() {
     }
 
     // Autofill both fields & trigger validation + mark dirty
-    setValue('password', password, { shouldValidate: true, shouldDirty: true });
-    setValue('confirmPassword', password, {
+    setValue("password", password, { shouldValidate: true, shouldDirty: true });
+    setValue("confirmPassword", password, {
       shouldValidate: true,
       shouldDirty: true,
     });
@@ -54,12 +54,12 @@ export default function Signup() {
   useEffect(() => {
     // only trigger if confirm has some value or password changed after suggest
     if (confirmPasswordValue) {
-      trigger('confirmPassword');
+      trigger("confirmPassword");
     }
   }, [passwordValue, confirmPasswordValue, trigger]);
 
   const createAccount = async (data) => {
-    setError('');
+    setError("");
     try {
       const userData = await authservice.createAccount(data);
       if (userData) {
@@ -67,10 +67,10 @@ export default function Signup() {
         if (currentUser) {
           dispatch(storeLogin(currentUser));
         }
-        navigate('/');
+        navigate("/");
       }
     } catch (err) {
-      setError(err?.message || 'Something went wrong');
+      setError(err?.message || "Something went wrong");
     }
   };
 
@@ -100,7 +100,10 @@ export default function Signup() {
           <div className="space-y-5">
             {/* Name */}
             <div>
-              <label htmlFor="name" className="text-base font-medium text-gray-900">
+              <label
+                htmlFor="name"
+                className="text-base font-medium text-gray-900"
+              >
                 Full Name
               </label>
               <div className="mt-2">
@@ -108,15 +111,22 @@ export default function Signup() {
                   id="name"
                   className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1"
                   placeholder="Enter your full name"
-                  {...register('name', { required: 'Full name is required' })}
+                  {...register("name", { required: "Full name is required" })}
                 />
-                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.name.message}
+                  </p>
+                )}
               </div>
             </div>
 
             {/* Email */}
             <div>
-              <label htmlFor="email" className="text-base font-medium text-gray-900">
+              <label
+                htmlFor="email"
+                className="text-base font-medium text-gray-900"
+              >
                 Email address
               </label>
               <div className="mt-2">
@@ -125,35 +135,42 @@ export default function Signup() {
                   className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1"
                   type="email"
                   placeholder="Enter your email"
-                  {...register('email', {
-                    required: 'Email is required',
+                  {...register("email", {
+                    required: "Email is required",
                     pattern: {
                       value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
-                      message: 'Email address must be valid',
+                      message: "Email address must be valid",
                     },
                   })}
                 />
-                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
             </div>
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="text-base font-medium text-gray-900">
+              <label
+                htmlFor="password"
+                className="text-base font-medium text-gray-900"
+              >
                 Password
               </label>
               <div className="mt-2 flex gap-2 items-center">
                 <input
                   id="password"
                   className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter a strong password"
-                  {...register('password', {
-                    required: 'Password is required',
+                  {...register("password", {
+                    required: "Password is required",
                     pattern: {
                       value: strongPasswordRegex,
                       message:
-                        'Must be at least 8 chars, include uppercase, lowercase, number & special char',
+                        "Must be at least 8 chars, include uppercase, lowercase, number & special char",
                     },
                   })}
                 />
@@ -162,7 +179,7 @@ export default function Signup() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="px-3 py-2 bg-gray-200 rounded-md text-sm hover:bg-gray-300"
                 >
-                  {showPassword ? 'Hide' : 'Show'}
+                  {showPassword ? "Hide" : "Show"}
                 </button>
                 <button
                   type="button"
@@ -172,24 +189,32 @@ export default function Signup() {
                   Suggest
                 </button>
               </div>
-              {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
 
             {/* Confirm Password */}
             <div>
-              <label htmlFor="confirmPassword" className="text-base font-medium text-gray-900">
+              <label
+                htmlFor="confirmPassword"
+                className="text-base font-medium text-gray-900"
+              >
                 Confirm Password
               </label>
               <div className="mt-2 flex gap-2 items-center">
                 <input
                   id="confirmPassword"
                   className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1"
-                  type={showConfirm ? 'text' : 'password'}
+                  type={showConfirm ? "text" : "password"}
                   placeholder="Re-enter your password"
-                  {...register('confirmPassword', {
-                    required: 'Please confirm your password',
+                  {...register("confirmPassword", {
+                    required: "Please confirm your password",
                     validate: (value) =>
-                      value === getValues('password') || 'Passwords do not match',
+                      value === getValues("password") ||
+                      "Passwords do not match",
                   })}
                 />
                 <button
@@ -197,10 +222,14 @@ export default function Signup() {
                   onClick={() => setShowConfirm(!showConfirm)}
                   className="px-3 py-2 bg-gray-200 rounded-md text-sm hover:bg-gray-300"
                 >
-                  {showConfirm ? 'Hide' : 'Show'}
+                  {showConfirm ? "Hide" : "Show"}
                 </button>
               </div>
-              {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>}
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
             </div>
 
             {/* Submit */}
