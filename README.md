@@ -54,12 +54,12 @@ Follow these steps to run HackDevs locally:
 git clone https://github.com/YourUsername/HackDevs.git
 cd Hackathon
 ```
-2. ** Install depedencies**
+2. **Install depedencies**
 
 ```
 npm i
 ```
-2. ** Run the Project**
+2. **Run the Project**
 ```
 npm run dev
 ```
